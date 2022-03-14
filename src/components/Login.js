@@ -67,23 +67,13 @@ class Login extends Component {
             >
             <div className="form-group">
                 <img className='icon-user' src="https://online.bvsc.com.vn/sso/images/graphics/user.svg"/>
-                <input
-                type="text"
-                className="form-control1"
-                id="username"
-                name="username"
-                placeholder="Username"
+                <input type="text" className="form-control1" id="username" name="username" placeholder="Username"
                 onChange={e => this.changeInputValue(e)}
                 />
             </div>
             <div className="form-group">
                 <img className='icon-pass' src="https://online.bvsc.com.vn/sso/images/graphics/pass.svg"/>
-                <input
-                type="password"
-                className="form-control2"
-                id="password"
-                name="password"
-                placeholder="Password"
+                <input type="password" className="form-control2" id="password" name="password" placeholder="Password"
                 onChange={e => this.changeInputValue(e)}
                 />
             </div>
