@@ -1,10 +1,10 @@
 export const UsersData = [
     {
-        username: 'admin1',
+        username: 'quynh',
         password: '12345'
       },
       {
-        username:'admin2',
-        password:'admin2@2'
+        username:'abcde',
+        password:'abc123'
       }
     ];
