@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { UsersData } from './User.js';
-import './style/Login.css'
-import { } from 'react-bootstrap';
-import Stock from '../img/Stock.png';
 import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { } from 'react-bootstrap';
+import {UsersData} from '../../dataFile/User'
+import '../../assets/style/Login.css'
 
 class Login extends Component {
   
@@ -31,7 +30,7 @@ class Login extends Component {
     if(password.length < 5) {
       returnData = {
         error: true,
-        msg: 'Mật khẩu phải từ 5 kí tự'
+        //msg: 'Mật khẩu phải từ 5 kí tự'
       }
     }
     return returnData;
@@ -40,21 +39,27 @@ class Login extends Component {
   submitForm(e) {
     e.preventDefault();
     const validation = this.validationForm()
-    const toCompare = {
-        username: e.target.elements.username.value,
-        password: e.target.elements.password.value,
-      };
+    
+    var username = e.target.elements.username.value;
+    var password = e.target.elements.password.value;
+    const checksubmit = UsersData.find(user => (user.username === username && user.password === password))
     if (validation.error) {
-        alert(validation.msg)
-      } else if (UsersData.some(user => JSON.stringify(user) === JSON.stringify(toCompare))) {
+        //alert(validation.msg)
+        this.setState({
+          errpass: "Mật khẩu phải từ 5 kí tự"
+        })
+      } else if (checksubmit) {
+        this.props.history.push('/Home/' + username);
         
-        this.props.history.push('/Home');
       } else {
-        alert('Sai tên đăng nhập hoặc mật khẩu');
+        this.setState({
+          err: "Sai tên đăng nhập hoặc mật khẩu"
+        })
       }
   }   
   render() {
     return (
+      <div className='body-login'>
       <div className="container">
           <div className="form-login">
               <div>
@@ -77,13 +82,17 @@ class Login extends Component {
                 onChange={e => this.changeInputValue(e)}
                 />
             </div>
+            <div className='error'>
+                {this.setState.err != '' ? this.state.err : ''}
+                {this.setState.errpass != '' ? this.state.errpass : ''}
+            </div>
             <button value="submit" className="btn_login" onClick={this.postDetails}>
                 Đăng nhập
             </button>
             </form>
             <div className='form-group1'>
-                <NavLink className="navlink-name" to={"./Change_password"}>Mở tài khoản</NavLink>
-                <NavLink className="navlink-pass" to={"./Register"}>Quên mật khẩu</NavLink>
+                <NavLink className="navlink-name" to={""}>Mở tài khoản</NavLink>
+                <NavLink className="navlink-pass" to={""}>Quên mật khẩu</NavLink>
             </div>
             <div className='form-group-flex'>
                 <div className="row">
@@ -106,12 +115,13 @@ class Login extends Component {
                 Liên hệ: (84-24) 3928 8080 - ext.699/(84-28) 3914 6888
             </div>
         </div>
-        <div className="footer">
+        {/* <div className="footer">
             <div className="footer-group">
                 <img src={Stock} alt="" className="icon-stock"/>
                 <p>Bảng giá</p>
             </div>
-        </div>
+        </div> */}
+      </div>
       </div>
     );
   }
