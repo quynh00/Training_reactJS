@@ -1,4 +1,4 @@
-export const UsersData = [
+export const usersData = [
     {
         username: 'admin1',
         password: '12345'

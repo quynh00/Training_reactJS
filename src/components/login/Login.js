@@ -1,92 +1,67 @@
-import React, { Component } from 'react';
+import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import { } from 'react-bootstrap';
-import {UsersData} from '../../dataFile/User'
+import {usersData} from '../../dataFile/User'
 import '../../assets/style/Login.css'
 
-class Login extends Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {
-      userName: "",
-      password: ""
-    };
+function Login() {
+
+  const [data, setData] = useState({
+    username: '',
+    password: ''
+  });
+  const history = useHistory()
+  const [status, SetStatus] = useState("true");
+  const {username, password} = data;
+
+  const changeInputValue = (e) => {
+    setData({...data, [e.target.name]: e.target.value})
   }
 
-  changeInputValue(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  validationForm() {
-    let returnData = {
-      error : false,
-      msg: ''
+  const checkUser = (usersData) => {
+    const usercheck = usersData.find(user => (
+      user.username === username && user.password === password))
+    if(usercheck) {
+      history.push('/Home');
+    }else {
+      SetStatus("false");
     }
-    const {password} = this.state
-    if(password.length < 5) {
-      returnData = {
-        error: true,
-        //msg: 'Mật khẩu phải từ 5 kí tự'
-      }
-    }
-    return returnData;
   }
 
-  submitForm(e) {
+  const submitHandler = (e) => {
     e.preventDefault();
-    const validation = this.validationForm()
+    checkUser(usersData);
+  }
     
-    var username = e.target.elements.username.value;
-    var password = e.target.elements.password.value;
-    const checksubmit = UsersData.find(user => (user.username === username && user.password === password))
-    if (validation.error) {
-        //alert(validation.msg)
-        this.setState({
-          errpass: "Mật khẩu phải từ 5 kí tự"
-        })
-      } else if (checksubmit) {
-        this.props.history.push('/Home/' + username);
-        
-      } else {
-        this.setState({
-          err: "Sai tên đăng nhập hoặc mật khẩu"
-        })
-      }
-  }   
-  render() {
-    return (
-      <div className='body-login'>
+  return (
+    <div className='body-login'>
       <div className="container">
           <div className="form-login">
               <div>
                   <img className="logo" src='https://online.bvsc.com.vn/sso/images/BVSC/logo-company.png'/>
               </div>
             <form className=''
-            onSubmit={e => {
-                this.submitForm(e);
-            }}
+            onSubmit={submitHandler}
             >
             <div className="form-group">
                 <img className='icon-user' src="https://online.bvsc.com.vn/sso/images/graphics/user.svg"/>
                 <input type="text" className="form-control1" id="username" name="username" placeholder="Username"
-                onChange={e => this.changeInputValue(e)}
+                onChange={changeInputValue}
                 />
             </div>
             <div className="form-group">
                 <img className='icon-pass' src="https://online.bvsc.com.vn/sso/images/graphics/pass.svg"/>
                 <input type="password" className="form-control2" id="password" name="password" placeholder="Password"
-                onChange={e => this.changeInputValue(e)}
+                onChange={changeInputValue}
                 />
             </div>
             <div className='error'>
-                {this.setState.err != '' ? this.state.err : ''}
-                {this.setState.errpass != '' ? this.state.errpass : ''}
+                {/* {this.setState.err != '' ? this.state.err : ''}
+                {this.setState.errpass != '' ? this.state.errpass : ''} */}
+                {status === "false" && (<div> sai tên đăng nhập hoặc mật khẩu</div>)}
             </div>
-            <button value="submit" className="btn_login" onClick={this.postDetails}>
+            <button value="submit" className="btn_login" >
                 Đăng nhập
             </button>
             </form>
@@ -123,8 +98,6 @@ class Login extends Component {
         </div> */}
       </div>
       </div>
-    );
+    )
   }
-}
-
-export default withRouter(Login);
+export default Login;
