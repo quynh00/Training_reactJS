@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Logouts, SwitchTheme, ChangeLanguage, GetUserName } from '../../redux/action';
@@ -10,7 +10,13 @@ import { Dropdown} from 'react-bootstrap';
 function Home() {
     const current = new Date();
     const date = current.toLocaleDateString();
-    const time = current.toLocaleTimeString( );
+    const [time, setClockState] = useState();
+    useEffect(() => {
+        setInterval(() => {
+            const date = new Date();
+            setClockState(date.toLocaleTimeString());
+        }, 1000);
+    }, []);
 
     const checkTheme = useSelector((state) => state.Theme.checkTheme)
     const [checked, setChecked] = useState(checkTheme)
