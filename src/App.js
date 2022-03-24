@@ -1,19 +1,19 @@
 import React, { } from 'react';
 import Login from './components/login/Login';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Route, Switch} from 'react-router-dom';
-import Home from './components/homePage/Home';
+import { Route, Routes} from 'react-router-dom';
+//import Home from './components/homePage/Home';
+import HomePage from './components/homePage/PrivateRoute';
 
 function App() {
     
     return (
       <>
-        <Switch>
-            <Route exact path="/" component={Login}/>
-            <Route path="/Home/" component={Home}/>            
-           
+        <Routes>
+            <Route exact path="/" element={<Login/>}/>
+            <Route path={"/Home/"} element={<HomePage/>}/>            
             {/* <PrivateRoute path='/Home' component={Home} />  */}
-        </Switch>
+        </Routes>
       </>
     );
 }

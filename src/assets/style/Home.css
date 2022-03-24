@@ -4,14 +4,15 @@
     width: 100%;
 }
 .logo-home{
-    width: 200%;
+    width: 300px;
     padding-top: 0px;
     margin-left: 0px;
 }
 .nav-item-date-time{
     color: #ffff;
     margin-top: 10px;
-    padding-left: 130px;
+    padding-left: 0px;
+    width: 60px;
 }
 .btn-logout{
     width: 110px;
@@ -21,38 +22,55 @@
     border: 1px solid #d5dae0;
     color: #ffff;
 }
-/* #dropdown-basic{
-    background-color: #3e95e2;
-    
-} */
+.namelogin{
+    text-align: center;
+}
+.setting-box-dark{
+    background-color: #494d4e;
+    color: #fff;
+    margin-top: 7px;
+}
+.setting-box-light{
+    background-color: #ffffff;
+    margin-top: 7px;
+}
 .setting-box{
-    width: 350px;
-    height: 160px;
-}
-.setting-box-theme{
-    background-color: #d5dae0;
     width: 320px;
+    height: 170px;
+    
+}
+#setting-box-theme, #setting-box-language{
+    width: 300px;
     height: 70px;
+    margin-top: 5px;
     border-radius: 5px;
-    margin-left: 15px;
+    margin-left: 10px;   
 }
-.setting-box-language{
-    background-color: #d5dae0;
-    width: 320px;
-    height: 85px;
-    margin-top: 8px;
-    border-radius: 5px;
-    margin-left: 15px;
+
+.option-theme{
+    justify-content: space-around;
+    display: flex;   
+    margin-left: 30px;
 }
+.option-language{
+    justify-content: space-around;
+    display: flex;
+    margin-left: 76px;
+}
+.option-light{
+    background-color: #e6f2f5;
+}
+.option-dark{
+    background-color: #232525;
+}
+
 #flagVn, #flagUs{
     width: 30%;
     height: auto;
     margin-top: 0px;
     margin-left: 10px;
 }
-.row{
-    padding-top: 10px;
-}
+
 .moving-header{
     width: 85%;
     float: right;
@@ -78,3 +96,4 @@
 #switchtheme, #lang{
     margin-left: 20px;
 }
+
