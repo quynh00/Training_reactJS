@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import {usersData} from '../../dataFile/User';
 import { Logins } from '../../redux/action'; 
 import { GetUserName } from '../../redux/action';
+import checkLogin from '../../serviceAPI/UserService';
 import '../../assets/style/Login.css';
 
 function Login() {
@@ -17,8 +18,7 @@ function Login() {
     const dispatch = useDispatch();
 
     const checkUser = (usersData) => {
-        const usercheck = usersData.find(user => (
-            user.username === username && user.password === password))
+        const usercheck = checkLogin(username, password);
         if(usercheck) {
             navigate('/Home')
             dispatch(Logins(true))
