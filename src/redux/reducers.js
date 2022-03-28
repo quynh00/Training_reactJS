@@ -8,7 +8,7 @@ const initialSate = {
         checkTheme: 'dark'
     },
     Language:{
-        langis:'vie'
+        langis:'vi'
     }
 
 }

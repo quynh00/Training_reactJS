@@ -21,10 +21,10 @@ export const SwitchTheme = (text) => {
     }
 }
 
-export const ChangeLanguage = (string) => {
+export const ChangeLanguage = (text) => {
     return{
         type:CHANGE_LANGUAGE,
-        payload: string
+        payload: text
     }
 }
 
