@@ -8,9 +8,30 @@ function PriceBoard() {
     const DisplayData = hose_instruments.map(info => {
             return(
                 <tr>
-                    <td>{info.symbol}</td>
+                    <td title={info.FullName}>{info.symbol}</td>
+                    <td>{info.reference}</td>
                     <td>{info.ceiling}</td>
                     <td>{info.floor}</td>
+                    <td>{info.bidPrice3}</td>
+                    <td>{info.bidVol3}</td>
+                    <td>{info.bidPrice2}</td>
+                    <td>{info.bidVol2}</td>
+                    <td>{info.bidPrice1}</td>
+                    <td>{info.bidVol1}</td>
+                    <td>{info.closePrice}</td>
+                    <td>{info.closeVol}</td>
+                    <td>{info.change}</td>
+                    <td>{info.offerPrice1}</td>
+                    <td>{info.offerVol1}</td>
+                    <td>{info.offerPrice2}</td>
+                    <td>{info.offerVol2}</td>
+                    <td>{info.offerPrice3}</td>
+                    <td>{info.offerVol3}</td>
+                    <td>{info.totalTrading}</td>
+                    <td>{info.totalTradingValue}</td>
+                    <td>{info.high}</td>
+                    <td>{info.averagePrice}</td>
+                    <td>{info.low}</td>
 
                 </tr>
             )
