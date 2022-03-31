@@ -21,7 +21,7 @@ body {
 }
   
 .light-mode {
-    background-color: #fff;
+    background-color: #e7e7e7;
     color: #333;
     height: 100%;
     transition: background-color 0.25s ease-in-out;
@@ -36,6 +36,11 @@ body {
     height: 50px;
     width: 100%;
     position: fixed;
+    z-index: 2;
+    top: 0;
+    // display: flex;
+    // margin-top: 0;
+
 }
 /* .header{
 } */
