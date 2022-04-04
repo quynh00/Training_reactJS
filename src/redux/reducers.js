@@ -1,8 +1,10 @@
-import { LOG_IN, LOG_OUT, SWITCH_THEME, GET_USER_NAME, CHANGE_LANGUAGE } from "./types";
+import { LOG_IN, LOG_OUT, SWITCH_THEME, GET_USER_NAME, CHANGE_LANGUAGE, SWITCH_TAB, NAME_TAB } from "./types";
 const initialSate = {
     Login: {
         isLogin: false,
         username:'',
+        table_tab: 'HOSE',
+        namePriceBoard: 'HOSE'
     },
     Theme: {
         checkTheme: 'dark'
@@ -42,6 +44,22 @@ const Reducer = (state = initialSate, action) => {
                     isLogin: action.payload,
                 }
             }
+        case SWITCH_TAB:
+            return {
+                ...state,
+                Login: {
+                    ...state.Login,
+                    table_tab: action.payload
+                }
+            }
+        case NAME_TAB:
+            return {
+                ...state,
+                Login: {
+                    ...state.Login,
+                    namePriceBoard: action.payload
+                }
+            }
 
         case SWITCH_THEME:
             return {
@@ -60,6 +78,7 @@ const Reducer = (state = initialSate, action) => {
                     langis: action.payload
                 }
             }
+        
         default:
             return state;
     }

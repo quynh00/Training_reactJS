@@ -17,6 +17,15 @@
         "marquee9": "GTGD: ",
         "marquee10": "3,611.2 tỷ"
     },
+    "nav": {
+        "input-search": "Tìm kiếm",
+        "fl-list": "Danh mục theo dõi",
+        "stock": "Sàng lọc cổ phiếu",
+        "derivatives": "Phái sinh",
+        "warrant": "Chứng quyền",
+        "bonds": "Trái phiếu doanh nghiệp",
+        "odd-lot": "Lô lẻ"
+    },
     "table": {
         "col1": "Mã CK",
         "col2": "TC",
@@ -55,5 +64,12 @@
         "col34": "Mua",
         "col35": "Bán",
         "col36": "Dư"
+    },
+    "footer":{
+        "dv": "Đơn vị TT cơ sở: Giá: ",
+        "kl": " Khối lượng: ",
+        "ps-gia": " - Đơn vị TT phái sinh: Giá: ",
+        "ps-kl": "Khối lượng",
+        "ll": " - Đơn vị TT lô lẻ: Khối lượng: "
     }
 }

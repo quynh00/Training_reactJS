@@ -1,4 +1,4 @@
-import { LOG_IN,LOG_OUT,SWITCH_THEME,CHANGE_LANGUAGE, GET_USER_NAME } from './types'
+import { LOG_IN,LOG_OUT,SWITCH_THEME,CHANGE_LANGUAGE, GET_USER_NAME, SWITCH_TAB, NAME_TAB } from './types'
 
 export const Logins = (data,) => {
     return{
@@ -16,21 +16,35 @@ export const Logouts = (data) => {
 
 export const SwitchTheme = (text) => {
     return{
-        type:SWITCH_THEME,
+        type: SWITCH_THEME,
         payload: text
     }
 }
 
 export const ChangeLanguage = (text) => {
     return{
-        type:CHANGE_LANGUAGE,
+        type: CHANGE_LANGUAGE,
         payload: text
     }
 }
 
 export const GetUserName = (data) => {
     return{
-        type:GET_USER_NAME,
+        type: GET_USER_NAME,
         payload:data
+    }
+}
+
+export const SwitchTab = (data) => {
+    return{
+        type: SWITCH_TAB,
+        payload: data
+    }
+}
+
+export const ChangeTabName = (data) => {
+    return {
+        type: NAME_TAB,
+        payload: data
     }
 }

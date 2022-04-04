@@ -17,6 +17,15 @@
         "marquee9": "TransVal: ",
         "marquee10": "3,611.2 billion"
     },
+    "nav": {
+        "input-search": "Search for  ...",
+        "fl-list": "Favorite symbols",
+        "stock": "Stock screening",
+        "derivatives": "Derivatives",
+        "warrant": "Warrant",
+        "bonds": "Bonds",
+        "odd-lot": "Odd lot"
+    },
     "table": {
         "col1": "Symbol",
         "col2": "Ref",
