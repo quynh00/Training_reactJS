@@ -29,7 +29,8 @@ function PriceBoard() {
     return (
         <>
         <div className={checkTheme === 'dark' ? "dark-table" : "light-table"}>
-            <table className='priceBoard'>
+            <div className='priceBoard'>
+            <table>
                 <thead className='table-header'>
                     <tr>
                         <th colSpan="1" rowSpan="2" className='symbol'>{t("table.col1")}</th>
@@ -78,8 +79,10 @@ function PriceBoard() {
                 </tbody>
             </table>
         </div>
+        </div>
 </>
     );
 }
+
 
 export default PriceBoard;

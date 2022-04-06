@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import PriceBoard from './PriceBoard';
 import Header from './Header';
 import Navbar from './Navbar';
-import HNX from './PriceBoard/HNX';
 
 function Home() {
 
@@ -19,6 +18,7 @@ function Home() {
                 <Navbar/>
                 <PriceBoard/>
                 {/* <HNX/> */}
+                {/* <Test/> */}
             </div>
             <div class="footer">
                 <div className="footer-item">
