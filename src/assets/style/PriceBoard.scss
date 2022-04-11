@@ -1,3 +1,45 @@
+
+.hight-light-green {
+    color: #ffff !important;
+    background: green;
+}
+.hight-light-red {
+    color: #ffff !important;
+    background: red;
+}
+.hight-light-yellow {
+    color: #ffff !important;
+    background: #d4b001;
+}
+.hight-light-purple {
+    color: #ffff !important;
+    background: #c92b9f;
+}
+.hight-light-blue {
+    color: #ffff !important;
+    background: #1eeeee;
+}
+
+.green-color {
+    color: #1ac316;
+}
+.red-color {
+    color: #f53e3e;
+}
+.yellow-color {
+    color: #d4b001;
+}
+.purple-color {
+    color: #ff25ff;
+}
+.blue-color {
+    color: #00c5c5;
+}
+
+
+
+
+
 @keyframes green-background-fade {
   50% {
     background: rgba(98, 173, 98, 0.3);
@@ -89,12 +131,14 @@
   
   .modal-main {
     position: fixed;
-    background: white;
+    background: #3b3b3b;
     width: 50%;
-    height: 30%;
+    height: 28%;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
+
   }
 .display-block {
     display: block !important;
@@ -104,10 +148,15 @@
     display: none;
 }
 .name-popup{
-    color: black;
+    color: #ffff;
     font-size: 15px;
-    margin-top: 10px;
+    // margin-top: 10px;
     margin-bottom: 10px;
+    padding: 10px;
+    top: 0;
+    border-radius: 10px 10px 0 0;
+    border-color: #ffff;
+    background-color: #2b2b2b;
 }
 #btn-close{
     // margin-bottom: 10px;
@@ -116,6 +165,10 @@
     background-color: #14a4c7;
     font-size: 13px;
     margin-top: 20px;
+}
+.table-popup{
+    width: 60% !important;
+    margin-left: 100px;
 }
 
 

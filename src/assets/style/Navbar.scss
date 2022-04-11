@@ -84,6 +84,13 @@
                 cursor: pointer;
                 font-size: 13px;
             }
+            .sub-menu-list-active{
+                padding: 5px;
+                background: #3b3b3b;
+                color: #d4b001;
+                cursor: pointer;
+                font-size: 13px;
+            }
             .sub-menu-list:hover{
                 color: #236abb;
                 // cursor: pointer;
@@ -97,6 +104,7 @@
             background-color: #236abb !important;
             display: flex;
             align-items: center;
+            color: #fff;
             border-radius: 3px 3px 0 0;
             height: 30px;
             font-size: .8rem;
@@ -110,6 +118,11 @@
         .fl-list{
             // display: flex;
             color: #fff;
+            cursor: pointer;
+            text-decoration: none
+        }
+        .fl-list-active{
+            color: #d4b001;
             cursor: pointer;
             text-decoration: none
         }

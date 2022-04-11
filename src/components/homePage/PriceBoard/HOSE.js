@@ -1,172 +1,227 @@
 import React, { useState, useEffect } from "react";
+import $ from 'jquery'; 
 import '../../../assets/style/PriceBoard.scss';
 import hose_instruments from '../../../dataFile/priceboard/hose_instruments.json';
 
-export default function HOSE() {
+const COLUMNS = ["bidPrice1", "bidPrice2", "bidPrice3", "offerPrice1", "offerPrice2", "offerPrice3"];
+function HOSE() {   
 
-    const [show, setShow] = useState(false);
-    const [selectedData, setSelectedData] = useState({});
-    const hanldeClick = (selectedRec) => {
-        setSelectedData(selectedRec);
-        setShow(true);
-    };
+  const Calculate = (info) => {
+    if (info !== 0 && info !== null && info !== undefined && info !== NaN) {
+        return ((Math.round(info) / 1000).toFixed(2))
+    } else {
+        return '';
+    }
+  }
 
-    const hideModal = () => {
-        setShow(false);
-    };
+  const [show, setShow] = useState(false);
+  const [selectedData, setSelectedData] = useState({});
+  const hanldeClick = (selectedRec) => {
+    setSelectedData(selectedRec);
+    setShow(true);
+  };
 
-    const Calculate = (info, percent) => {
-        if (info > 0) {
-            return ((Math.round(info ) / percent).toFixed(2))
-        } else {
-            return ''
-        }
-    }
-    
-    const getClass = (info, ref, ceil, floor) =>{
-        if(info > ref && info < ceil){
-            return "green";
-        }else if(info > floor && info < ref){
-            return "red"
-        }else if(info === ref){
-            return "yellow"
-        }else if(info === ceil){
-            return "violet"
-        }else if(info === floor){
-            return "blue"
-        }
-    }
+  const hideModal = () => {
+    setShow(false);
+  };
 
-    const ColorHighlight = (info, ref, ceil, floor) =>{
-        if(info > ref && info < ceil){
-            return "Highlight-green";
-        }else if(info > floor && info < ref){
-            return "Highlight-red"
-        }else if(info === ref){
-            return "Highlight-yellow"
-        }else if(info === ceil){
-            return "Highlight-violet"
-        }else if(info === floor){
-            return "Highlight-blue"
-        }
-    }
-
-    const Change = (info, percent) => {
-        if(info > 0) {
-            return '+' + ((Math.round(info ) / percent).toFixed(2))
-        }else if(info < 0){
-            return ((Math.round(info ) / percent).toFixed(2))
-        }else{
-            return ''
-        }
-    }
-    
-    const ChangePercent = (info, percent) => {
-        if(info > 0) {
-            return '+' + ((Math.round(info ) / percent).toFixed(2)) + '%'
-        }else if(info < 0){
-            return ((Math.round(info ) / percent).toFixed(2)) + '%'
-        }else{
-            return ''
-        }
-    }
-    const start = 0//Math.floor(Math.random() * 10)
-    const end = Math.floor(Math.random() * (20 - 10)) + 10
-    // console.log(start);
-    let HoseData = hose_instruments.d;
-    let get20Data = HoseData.slice(0, 20)
-    const [info, setData] = useState(get20Data);
-    const randomValue = (min, max) => {
+  let get20Data = hose_instruments.d.slice(0, 10);
+  const [data, setData] = useState(get20Data);
+  
+  const randomValue = (min, max) => {
     let value = Math.floor(Math.random() * (max - min + 1) + min)
-    value = parseFloat(value / 1000).toFixed(2) * 1000;
     return value;
   }
-  const ChangeData = () => {
-    get20Data.slice(start, end).map((info) => {
-        if (info.bidPrice2 && info.bidPrice3 &&
-            info.offerPrice1 && info.offerPrice2 && info.offerPrice3 &&
-            info.closePrice !== undefined) {
-          randomValue(info.floor, info.ceiling)
-          return (
-            setData(get20Data.slice(0, 10)),
-            info.bidPrice3 = randomValue(info.floor, info.ceiling),
-            info.bidPrice2 = randomValue(info.floor, info.ceiling),
-            info.bidPrice1 = randomValue(info.floor, info.ceiling),
-            info.offerPrice1 = randomValue(info.floor, info.ceiling),
-            info.offerPrice2 = randomValue(info.floor, info.ceiling),
-            info.offerPrice3 = randomValue(info.floor, info.ceiling),
-            info.closePrice = randomValue(info.floor, info.ceiling)
-            )
-        }else {
-            return ''
-        }
-    })
-  }
-    useEffect(() => {
-        setInterval(ChangeData, 3000)
-    }, [])
-    const TableHOSE = hose_instruments.d.map((info, i) =>  {
-        const a = info.reference;
-        const b = info.ceiling;
-        const c = info.floor;
 
-        return (
-            <>
-            <tr key={i}>
-                <td className={getClass(info.closePrice, a, b, c)} title={info.FullName} onClick={() => hanldeClick(info)}>{info.symbol}</td>
-                <td className='col-ref'>{Calculate(info.reference, 1000)}</td>
-                <td className='col-ceil'>{Calculate(info.ceiling, 1000)}</td>
-                <td className='col-floor'>{Calculate(info.floor, 1000)}</td>
-                <td className={ColorHighlight(info.bidPrice3, a, b, c)}>{Calculate(info.bidPrice3, 1000)}</td>
-                <td className={getClass(info.bidPrice3, a, b, c)}>{Calculate(info.bidVol3,1000)}</td>
-                <td className={ColorHighlight(info.bidPrice2, a, b, c)}>{Calculate(info.bidPrice2,1000)}</td>
-                <td className={getClass(info.bidPrice2, a, b, c)}>{Calculate(info.bidVol2, 1000)}</td>
-                <td className={ColorHighlight(info.bidPrice1, a, b, c)}>{Calculate(Number(info.bidPrice1),1000)}</td>
-                <td className={getClass(info.bidPrice1, a, b, c)}>{Calculate(info.bidVol1, 1000)}</td>
-                <td className={ColorHighlight(info.closePrice, a, b, c)} id='khoplenh'>{Calculate(info.closePrice, 1000)}</td>
-                <td className={getClass(info.closePrice, a, b, c)} id='khoplenh'>{Calculate(info.closeVol, 1000)}</td>
-                <td className={getClass(info.closePrice, a, b, c)} id='khoplenh'>{Change(info.change, 1000)}</td>
-                <td className={getClass(info.closePrice, a, b, c)} id='khoplenh'>{ChangePercent(info.change, 1000)}</td>
-                <td className={ColorHighlight(info.offerPrice1, a, b, c)}>{Calculate(Number(info.offerPrice1), 1000)}</td>
-                <td className={getClass(info.offerPrice1, a, b, c)}>{Calculate(info.offerVol1, 1000)}</td>
-                <td className={ColorHighlight(info.offerPrice2, a, b, c)}>{Calculate(info.offerPrice2, 1000)}</td>
-                <td className={getClass(info.offerPrice2, a, b, c)}>{Calculate(info.offerVol2,1000)}</td>
-                <td className={ColorHighlight(info.offerPrice3, a, b, c)}>{Calculate(info.offerPrice3, 1000)}</td>
-                <td className={getClass(info.offerPrice3, a, b, c)}>{Calculate(info.offerVol3, 1000)}</td>
-                <td>{Calculate(info.totalTrading, 1000)}</td>
-                <td>{Calculate(info.totalTradingValue,1000)}</td>
-                <td className={getClass(info.high, a, b, c)}>{Calculate(info.high, 1000)}</td>
-                <td className={getClass(info.averagePrice, a, b, c)}>{Calculate(info.averagePrice, 1000)}</td>
-                <td className={getClass(info.low, a, b, c)}>{Calculate(info.low, 1000)}</td>
-                <td>{Calculate(info.TOTAL_OFFER_QTTY, 1)}</td>
-                <td>{Calculate(info.TOTAL_BID_QTTY, 1)}</td>
-                <td>{Calculate(info.foreignBuy, 1000)}</td>
-                <td>{Calculate(info.foreignSell, 1000)}</td>
-                <td>{Calculate(info.foreignRemain, 1000)}</td>
-            </tr>
-        </>
-        )
+  //random các ô theo vị trí cột : hàng
+  const randomizeCells = (cellNumber, i = 0, result = []) => {
+    const columnIndex = randomValue(0, COLUMNS.length); 
+    const cellValue = randomValue(0, 10); 
+    const pair = `${COLUMNS[columnIndex]}:${cellValue}`; 
+    if (!result.includes(pair)) { 
+      i++; 
+    } else {
+      return randomizeCells(cellNumber, i, result);
     }
-    )
-    return (
-        <>
-            {TableHOSE}
-            {show && <Modal details={selectedData} handleClose={hideModal} />}
+    if (i === 10) { 
+      return result;
+    }
+    result.push(pair);
+    return randomizeCells(cellNumber, i, result);
+  };
+ 
+  //update giá trị cho các ô
+  const updateRandomInfoValues = ({ info, cellIndex, randomCells }) => {
+    const infoKeys = Object.keys(info); 
+    for (const infoKey of infoKeys) {
+      if (randomCells.some((cell) => cell === `${infoKey}:${cellIndex}`)) {
+        info[infoKey] = randomValue(info.floor, info.ceiling);
+      }
+    }
+    return info;
+  };
+  
+  const ChangeData = () => {
+    const randomCells = randomizeCells();
+    // console.log(randomCells);
+    get20Data.slice().map((info, index) => {
+      if (info.bidPrice1 && info.bidPrice2 && info.bidPrice3 &&
+        info.offerPrice1 && info.offerPrice2 && info.offerPrice3 &&
+        info.closePrice !== undefined) {
+        const updatedInfo = updateRandomInfoValues({
+          info: info,
+          cellIndex: index,
+          randomCells: randomCells
+        });
+          setData(get20Data.slice())
+          let bidPrice3 = updatedInfo.bidPrice3
+          let bidPrice2 = updatedInfo.bidPrice2
+          let bidPrice1 = updatedInfo.bidPrice1
+          let offerPrice1 = updatedInfo.offerPrice1
+          let offerPrice2 = updatedInfo.offerPrice2
+          let offerPrice3 = updatedInfo.offerPrice3
+          let closePrice = updatedInfo.closePrice
+        return (
+          info.bidPrice3_classHighLight = getHighLight(info.bidPrice3, bidPrice3, info),
+          info.bidPrice2_classHighLight = getHighLight(info.bidPrice2, bidPrice2, info),
+          info.bidPrice1_classHighLight = getHighLight(info.bidPrice1, bidPrice1, info),
 
-        </>
+          info.offerPrice1_classHighLight = getHighLight(info.offerPrice1, offerPrice1, info),
+          info.offerPrice2_classHighLight = getHighLight(info.offerPrice2, offerPrice2, info),
+          info.offerPrice3_classHighLight = getHighLight(info.offerPrice3, offerPrice3, info),
+
+          info.closePrice_classHighLight = getHighLight(info.closePrice, closePrice, info),
+          
+          info.bidPrice1 = bidPrice1,
+          info.bidPrice2 = bidPrice2,
+          info.bidPrice3 = bidPrice3,
+          info.offerPrice1 = offerPrice1,
+          info.offerPrice2 = offerPrice2,
+          info.offerPrice3 = offerPrice3,
+          info.closePrice = closePrice
+          );
+      } else {
+        return "";
+      }
+    });
+    setTimeout(function() {
+      clearHighLight()
+    }, 1000)
+  };
+  useEffect(() => {
+      setInterval(ChangeData, 3000)
+  }, [])
+  
+  const setColor = (name, info, value) =>{
+    let className = ''
+    if(value === info.reference){
+        className = "yellow"
+    }else if(value === info.ceiling){
+        className = "violet"
+    }else if(value === info.floor){
+        className = "blue"
+    }
+    if(value > info.reference){
+      className = "green"
+    }else {
+        className = "red"        
+    }
+    if(info[name + '_classHighLight']){
+      className = className + ' ' + info[name + '_classHighLight']
+    }
+    return className
+  }
+
+  const getHighLight = (currentValue, value, info) => {
+    let className = ''
+    if(currentValue === value) {
+      className = ''
+    } else if(currentValue !== value && value === info.reference) {
+      className = 'hight-light-' + 'yellow'
+    } else if(currentValue !== value && value === info.ceiling) {
+      className = 'hight-light-' + 'purple'
+    } else if(currentValue !== value && value === info.floor) {
+      className = 'hight-light-' + 'blue'
+    } else if(currentValue !== value && value > info.reference) {
+      className = 'hight-light-' + 'green'
+    } else {
+      className = 'hight-light-' + 'red' 
+    }
+    return className;
+  }
+
+  const clearHighLight = () => {
+    $(".table tbody tr td").removeClass('hight-light-yellow')
+    $(".table tbody tr td").removeClass('hight-light-purple')
+    $(".table tbody tr td").removeClass('hight-light-blue')
+    $(".table tbody tr td").removeClass('hight-light-green')
+    $(".table tbody tr td").removeClass('hight-light-red')
+
+  }
+
+  const tableHOSE = hose_instruments.d.map((info) => {
+    return(
+      <>
+          <tr>
+          <td className={setColor('symbol', info, info.closePrice)} onClick={() => hanldeClick(info)}>{info.symbol}</td>
+          <td className='col-ref'>{Calculate(info.reference)}</td>
+          <td className='col-ceil'>{Calculate(info.ceiling)}</td>
+          <td className='col-floor'>{Calculate(info.floor)}</td>
+          
+          <td className={setColor('bidPrice3', info, info.bidPrice3)}>{Calculate(info.bidPrice3)}</td>
+          <td className={setColor('bidVol3', info, info.bidPrice3)}>{Calculate(info.bidVol3)}</td>
+          <td className={setColor('bidPrice2', info, info.bidPrice2)}>{Calculate(info.bidPrice2)}</td>
+          <td className={setColor('bidVol2', info, info.bidPrice2)}>{Calculate(info.bidVol2)}</td>
+          <td className={setColor('bidPrice1', info, Number(info.bidPrice1))}>{Calculate(Number(info.bidPrice1))}</td>
+          <td className={setColor('bidVol1', info, Number(info.bidPrice1))}>{Calculate(info.bidVol1)}</td>
+          
+          <td className={setColor('closePrice', info, info.closePrice)}>{Calculate(info.closePrice)}</td>
+          <td className={setColor('closeVol',info, info.closePrice)}>{Calculate(info.closeVol)}</td>
+          <td className={setColor('change', info, info.closePrice)}>{info.change > 0 ? '+' : ''}{Calculate(info.change)}</td>
+          <td className={setColor('change', info, info.closePrice)}>{info.change > 0 ? '+' : ''}{Calculate(info.change)}{info.change ? '%' : ''}</td>
+         
+          <td className={setColor('offerPrice1', info, Number(info.offerPrice1))}>{Calculate(Number(info.offerPrice1))}</td>
+          <td className={setColor('offerVol1', info, Number(info.offerPrice1))}>{Calculate(info.offerVol1)}</td>
+          <td className={setColor('offerPrice2', info, info.offerPrice2)}>{Calculate(info.offerPrice2)}</td>
+          <td className={setColor('offerVol2', info, info.offerPrice2)}>{Calculate(info.offerVol2)}</td>
+          <td className={setColor('offerPrice3',info, info.offerPrice3)}>{Calculate(info.offerPrice3)}</td>
+          <td className={setColor('offerVol3',info, info.offerPrice3)}>{Calculate(info.offerVol3)}</td>
+
+          <td className='TVAL'>{Calculate(info.totalTrading)}</td>
+          <td className='TVOL'>{Calculate(info.totalTradingValue)}</td>
+      
+          <td className={setColor('high', info, info.high)}>{Calculate(info.high)}</td>
+          <td className={setColor('averagePrice',info, info.averagePrice)}>{Calculate(info.averagePrice)}</td>
+          <td className={setColor('low', info, info.low)}>{Calculate(info.low)}</td>
+          <td></td>
+          <td></td>
+          <td>{Calculate(info.foreignBuy)}</td>
+          <td>{Calculate(info.foreignSell)}</td>
+          <td>{Calculate(info.foreignRemain)}</td>
+          </tr>
+      </>
     )
+  })
+  return (
+    <>
+    {tableHOSE}
+    {show && <Modal details={selectedData} handleClose={hideModal} />}
+    </>
+  );
 }
+
+export default HOSE;
 const Modal = ({ handleClose, details }) => {
     return (
       <div className="modal display-block">
         <section className="modal-main">
-          <div className="name-popup">
-          {details?.FullName}
-          </div>
-            <table class="table">
+            <div className="name-popup">
+                {details?.FullName}
+            </div>
+            <table class="table-popup">
               <thead>
                 <tr>
-                  <th scope="col">Mã CK</th>
+                  <th scope="col" >Mã CK</th>
                   <th scope="col">Giá</th>
                   <th scope="col">+/-</th>
                   <th scope="col">KL</th>
@@ -175,9 +230,9 @@ const Modal = ({ handleClose, details }) => {
               <tbody>
                 <tr>
                   <td>{details?.symbol}</td>
-                  <td>{details?.closePrice}</td>
-                  <td>{details?.change}</td>
-                  <td>{details?.closeVol}</td>
+                  <td>{details?.closePrice/1000}</td>
+                  <td>{details?.change/1000}{details?.change ? '%' : ''}</td>
+                  <td>{details?.closeVol/1000}</td>
                 </tr>
               </tbody>
             </table>

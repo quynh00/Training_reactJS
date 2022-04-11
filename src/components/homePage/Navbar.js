@@ -51,20 +51,20 @@ function Navbar() {
                     <a title={t('nav.fl-list')} className='fl-list'>{t('nav.fl-list')}<VscTriangleDown/></a>
                 </li>
                 <li className='sub-menu item'>
-                    <a title={t('nav.hose')} className='fl-list' onClick={tableHOSE}>{tabName}<VscTriangleDown/></a>
+                    <a title={t('nav.hose')} className={table === 'HOSE' ? 'fl-list-active' : 'fl-list'} onClick={tableHOSE}>{tabName}<VscTriangleDown/></a>
                     <ul className='sub-menu-item'>
-                        <li className='sub-menu-list' onClick={tableHOSE}>
+                        <li className={table === 'HOSE' ? 'sub-menu-list-active' : 'sub-menu-list'} onClick={tableHOSE}>
                             <a><span>HOSE</span></a>
                         </li>
-                        <li className='sub-menu-list' onClick={tableVN30}>
+                        <li className={table === 'VN30' ? 'sub-menu-list-active' : 'sub-menu-list'} onClick={tableVN30}>
                             <a><span>VN30</span></a>
                         </li>
                     </ul>
                 </li>
                 <li className='sub-menu item'>
-                    <a title={t('nav.HNX_title')} className='fl-list' onClick={tableHNX}>HNX<VscTriangleDown/></a>
+                    <a title={t('nav.HNX_title')} className={table === 'HNX' ? 'fl-list-active' : 'fl-list'} onClick={tableHNX}>HNX<VscTriangleDown/></a>
                     <ul className='sub-menu-item'>
-                        <li className='sub-menu-list' onClick={tableHNX}>
+                        <li className={table === 'HNX' ? 'sub-menu-list-active' : 'sub-menu-list'} onClick={tableHNX}>
                             <a ><span>HNX</span></a>
                         </li>
                         <li className='sub-menu-list' >
@@ -73,7 +73,7 @@ function Navbar() {
                     </ul>
                 </li>
                 <li className='sub-menu '>
-                    <a title={t('nav.Upcom_title')} className='fl-list' onClick={tableUPCOM}>UPCOM<VscTriangleDown/></a>
+                    <a title={t('nav.Upcom_title')} className={table === 'UPCOM' ? 'fl-list-active' : 'fl-list'} onClick={tableUPCOM}>UPCOM<VscTriangleDown/></a>
                 </li>
                 <li className='sub-menu '>
                     <a className='fl-list'>{t('nav.stock')}<AiFillStar/><VscTriangleDown/></a>
