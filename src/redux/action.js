@@ -1,4 +1,4 @@
-import { LOG_IN,LOG_OUT,SWITCH_THEME,CHANGE_LANGUAGE, GET_USER_NAME, SWITCH_TAB, NAME_TAB } from './types'
+import { LOG_IN,LOG_OUT,SWITCH_THEME,CHANGE_LANGUAGE, GET_USER_NAME, SWITCH_TAB, NAME_TAB, SLIDE_SHOW } from './types'
 
 export const Logins = (data,) => {
     return{
@@ -46,5 +46,12 @@ export const ChangeTabName = (data) => {
     return {
         type: NAME_TAB,
         payload: data
+    }
+}
+
+export const TurnSlide = (data) => {
+    return{
+        type: SLIDE_SHOW,
+        payload:data
     }
 }

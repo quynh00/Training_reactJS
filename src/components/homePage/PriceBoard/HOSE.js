@@ -3,7 +3,7 @@ import $ from 'jquery';
 import '../../../assets/style/PriceBoard.scss';
 import hose_instruments from '../../../dataFile/priceboard/hose_instruments.json';
 
-const COLUMNS = ["bidPrice1", "bidPrice2", "bidPrice3", "offerPrice1", "offerPrice2", "offerPrice3"];
+const COLUMNS = ["bidPrice1", "bidPrice2", "bidPrice3","closePrice", "offerPrice1", "offerPrice2", "offerPrice3"];
 function HOSE() {   
 
   const Calculate = (info) => {
@@ -36,14 +36,14 @@ function HOSE() {
   //random các ô theo vị trí cột : hàng
   const randomizeCells = (cellNumber, i = 0, result = []) => {
     const columnIndex = randomValue(0, COLUMNS.length); 
-    const cellValue = randomValue(0, 10); 
+    const cellValue = randomValue(0, 15); 
     const pair = `${COLUMNS[columnIndex]}:${cellValue}`; 
     if (!result.includes(pair)) { 
       i++; 
     } else {
       return randomizeCells(cellNumber, i, result);
     }
-    if (i === 10) { 
+    if (i === 50) { 
       return result;
     }
     result.push(pair);
@@ -51,7 +51,7 @@ function HOSE() {
   };
  
   //update giá trị cho các ô
-  const updateRandomInfoValues = ({ info, cellIndex, randomCells }) => {
+  const updateRandomInfoValues = ({ info: {...info}, cellIndex, randomCells }) => {
     const infoKeys = Object.keys(info); 
     for (const infoKey of infoKeys) {
       if (randomCells.some((cell) => cell === `${infoKey}:${cellIndex}`)) {
@@ -73,7 +73,6 @@ function HOSE() {
           cellIndex: index,
           randomCells: randomCells
         });
-          setData(get20Data.slice())
           let bidPrice3 = updatedInfo.bidPrice3
           let bidPrice2 = updatedInfo.bidPrice2
           let bidPrice1 = updatedInfo.bidPrice1
@@ -104,9 +103,11 @@ function HOSE() {
         return "";
       }
     });
-    setTimeout(function() {
+    setData(get20Data.slice())
+    setTimeout(() => {
       clearHighLight()
     }, 1000)
+
   };
   useEffect(() => {
       setInterval(ChangeData, 3000)
@@ -137,15 +138,15 @@ function HOSE() {
     if(currentValue === value) {
       className = ''
     } else if(currentValue !== value && value === info.reference) {
-      className = 'hight-light-' + 'yellow'
+      className = 'hight-light-yellow'
     } else if(currentValue !== value && value === info.ceiling) {
-      className = 'hight-light-' + 'purple'
+      className = 'hight-light-purple'
     } else if(currentValue !== value && value === info.floor) {
-      className = 'hight-light-' + 'blue'
+      className = 'hight-light-blue'
     } else if(currentValue !== value && value > info.reference) {
-      className = 'hight-light-' + 'green'
+      className = 'hight-light-green'
     } else {
-      className = 'hight-light-' + 'red' 
+      className = 'hight-light-red' 
     }
     return className;
   }

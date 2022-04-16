@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import PriceBoard from './PriceBoard';
 import Header from './Header';
 import Navbar from './Navbar';
+import { Form } from 'react-bootstrap';
 
 function Home() {
 

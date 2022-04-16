@@ -25,7 +25,15 @@ function PriceBoard() {
     
     const { t, i18n } = useTranslation();
     const checkTheme = useSelector((state) => state.Theme.checkTheme)
-
+    
+    const SlideStatus = useSelector((state) => state.Slide.isShow)
+    const setSlideShow = () => {
+        if(SlideStatus === true){
+          return 'slide'
+        }else{
+          return 'stop'
+        }
+      }
     return (
         <>
         <div className={checkTheme === 'dark' ? "dark-table" : "light-table"}>
@@ -73,7 +81,7 @@ function PriceBoard() {
                         <th colSpan="1" rowSpan="1">{t("table.col36")}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={setSlideShow()}>
                     {/* {DisplayData} */}
                     {Switch_tab()}
                 </tbody>

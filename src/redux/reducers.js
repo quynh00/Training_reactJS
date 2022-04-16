@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_OUT, SWITCH_THEME, GET_USER_NAME, CHANGE_LANGUAGE, SWITCH_TAB, NAME_TAB } from "./types";
+import { LOG_IN, LOG_OUT, SWITCH_THEME, GET_USER_NAME, CHANGE_LANGUAGE, SWITCH_TAB, NAME_TAB, SLIDE_SHOW } from "./types";
 const initialSate = {
     Login: {
         isLogin: false,
@@ -11,8 +11,10 @@ const initialSate = {
     },
     Language:{
         langis:'vi'
+    },
+    Slide: {
+        isShow: false
     }
-
 }
 
 const Reducer = (state = initialSate, action) => {
@@ -60,6 +62,16 @@ const Reducer = (state = initialSate, action) => {
                     namePriceBoard: action.payload
                 }
             }
+
+        case SLIDE_SHOW: {
+            return{
+                ...state,
+                Slide:{
+                    ...state.Slide,
+                    isShow:action.payload
+                }
+            }
+        }
 
         case SWITCH_THEME:
             return {
