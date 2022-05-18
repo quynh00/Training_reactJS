@@ -64,5 +64,14 @@
         "col34": "Bought",
         "col35": "Sold",
         "col36": "Room"
+    },
+    "footer":{
+        "dv": "Stock market: Price: ",
+        "kl": " Volumn: ",
+        "ps-gia": " - Derivative market: Price: ",
+        "ps-kl": "Volum",
+        "ll": " - Odd lot market: Volumn: ",
+        "price_board": "Price board",
+        "set_order": "Quick order"
     }
 }

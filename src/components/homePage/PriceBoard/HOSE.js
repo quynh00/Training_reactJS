@@ -25,7 +25,7 @@ function HOSE() {
     setShow(false);
   };
 
-  let get20Data = hose_instruments.d.slice(0, 10);
+  let get20Data = hose_instruments.d.slice(0, 20);
   const [data, setData] = useState(get20Data);
   
   const randomValue = (min, max) => {
@@ -43,7 +43,7 @@ function HOSE() {
     } else {
       return randomizeCells(cellNumber, i, result);
     }
-    if (i === 50) { 
+    if (i === 20) { 
       return result;
     }
     result.push(pair);
@@ -110,7 +110,7 @@ function HOSE() {
 
   };
   useEffect(() => {
-      setInterval(ChangeData, 3000)
+      setInterval(ChangeData, 1000)
   }, [])
   
   const setColor = (name, info, value) =>{

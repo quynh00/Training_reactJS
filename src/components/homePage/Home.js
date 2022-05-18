@@ -6,6 +6,8 @@ import PriceBoard from './PriceBoard';
 import Header from './Header';
 import Navbar from './Navbar';
 import { Form } from 'react-bootstrap';
+import { RiLineChartLine } from 'react-icons/ri';
+import { HiShoppingCart } from 'react-icons/hi';
 
 function Home() {
 
@@ -28,6 +30,16 @@ function Home() {
                     <span>{t("footer.ps-gia")}</span><span className="hs">x1</span>
                     <span>{t("footer.ps-kl")}</span><span className="hs">x1</span>
                     <span>{t("footer.ll")}</span><span className="hs">x1</span>
+                </div>
+                <div className='wrap-btn'>
+                    <div className='btn-watch'>
+                        <RiLineChartLine className='watch-chart-icon' />
+                        <span>{t('footer.price_board')}</span>
+                    </div>
+                    <div className='btn-set'>
+                        <HiShoppingCart className='watch-chart-icon' />
+                        <span>{t('footer.set_order')}</span>
+                    </div>
                 </div>
             </div>
         </>   

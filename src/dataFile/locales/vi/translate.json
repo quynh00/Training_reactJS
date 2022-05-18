@@ -70,6 +70,8 @@
         "kl": " Khối lượng: ",
         "ps-gia": " - Đơn vị TT phái sinh: Giá: ",
         "ps-kl": "Khối lượng",
-        "ll": " - Đơn vị TT lô lẻ: Khối lượng: "
+        "ll": " - Đơn vị TT lô lẻ: Khối lượng: ",
+        "price_board": "Bảng giá",
+        "set_order": "Đặt lệnh"
     }
 }

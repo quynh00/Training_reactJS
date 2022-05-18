@@ -6,7 +6,11 @@ import {BsArrowBarRight, BsFillPersonLinesFill} from 'react-icons/bs';
 import '../../assets/style/Header.scss';
 import { Dropdown} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-//import vd from '../../assets/img/vd.PNG'
+//import vd from '../../assets/img/vd.PNG';
+import { FaUser } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { VscTriangleDown } from 'react-icons/vsc';
 import { ImPlus } from 'react-icons/im';
 import PriceBoard from './PriceBoard';
 
@@ -91,13 +95,19 @@ function Header() {
                         </marquee>
                     </li>
                     <li className="nav-item-btn-logout">
-                        <Link to="/"><button className='btn-logout' onClick={hadleLogout}><BsArrowBarRight size="1.5em"/>{t("home.logout")}</button></Link>
+                    
+                        <Link to="/"><button className='btn-logout' onClick={hadleLogout}>
+                            {/* <BsArrowBarRight size="1.5em"/> */}
+                            <i className="fas fa-sign-out-alt" size="1.5em"></i>
+                            {t("home.logout")}</button></Link>
                     </li>
                     <li className="nav-item-user">
                         <Dropdown>
-                            <Dropdown.Toggle variant="" id="dropdown-basic">
-                                <BsFillPersonLinesFill size="2em" color="#ffff"/>
+                            <Dropdown.Toggle variant="" id="dropdown-basic" >
+                                <FaUser size="1.5em" color="#ffff"/>
+                                {/* <BsFillPersonLinesFill size="2em" color="#ffff"/> */}
                             </Dropdown.Toggle>
+                            {/* <FaUser size="2em" color="#ffff" /><VscTriangleDown className='info-icon-arrow' /> */}
                             <Dropdown.Menu className={checked === 'dark' ? 'setting-box-dark' : 'setting-box-light'}>
                                 <div className='setting-box' >
                                     <div className='namelogin'>{t("home.greet")}{User}</div>

@@ -8,7 +8,7 @@ import '../../assets/style/Navbar.scss';
 import chart1 from'../../assets/img/chart-light.PNG';
 import chart2 from'../../assets/img/chart-dark.PNG';
 import { ChangeTabName, SwitchTab, TurnSlide } from '../../redux/action';
-import { BsFillCameraVideoFill } from 'react-icons/bs';
+import { BsFillCameraVideoFill, BsThreeDotsVertical } from 'react-icons/bs';
 import { IoIosArrowDropupCircle } from 'react-icons/io';
 
 function Navbar() {
@@ -55,21 +55,23 @@ function Navbar() {
         }
     }
 
+    const [show, setShow] = useState(true)
+
     return (
-        <>
         
         <div className={checkTheme === 'dark' ? "dark-menu" : "light-menu"}>
-        <div>
-            <img src={checkTheme === 'dark' ? chart2 : chart1} alt='chart' className='chart-img' />
-        </div>
+            {/* <div>{
+                show?<img src={checkTheme === 'dark' ? chart2 : chart1} alt='chart' className='chart-img' />:null
+            }
+            </div> */}
             
             <ul className='primary'>
-            <div className='search-box'>
-                <div className='input-box'>
-                    <input type='text' placeholder={t('nav.input-search')} className='input-search' />
+                <div className='search-box'>
+                    <div className='input-box'>
+                        <input type='text' placeholder={t('nav.input-search')} className='input-search' />
+                    </div>
+                    <button type='submit' className='btn-search'><ImPlus className='plus-icon' /></button>
                 </div>
-                <button type='submit' className='btn-search'><ImPlus className='plus-icon' /></button>
-            </div>
                 <li className='tabWatchList '>
                     <a title={t('nav.fl-list')} className='fl-list'>{t('nav.fl-list')}<VscTriangleDown/></a>
                 </li>
@@ -99,7 +101,7 @@ function Navbar() {
                     <a title={t('nav.Upcom_title')} className={table === 'UPCOM' ? 'fl-list-active' : 'fl-list'} onClick={tableUPCOM}>UPCOM<VscTriangleDown/></a>
                 </li>
                 <li className='sub-menu '>
-                    <a className='fl-list'>{t('nav.stock')}<AiFillStar/><VscTriangleDown/></a>
+                    <a className='fl-list'>{t('nav.stock')}<AiFillStar color='yellow'/><VscTriangleDown/></a>
                 </li>
                 <li className='sub-menu '>
                     <a className='fl-list'>{t('nav.derivatives')}<VscTriangleDown/></a>
@@ -114,15 +116,22 @@ function Navbar() {
                     <a className='fl-list'>{t('nav.odd-lot')} <VscTriangleDown className='arrow-down' /></a>
                 </li>
             </ul>
-            <div className='icon-list'>
-                <ul className='secondary icon-toggle-two'>
+            {/* <div className='icon-list'> */}
+                <ul className='primary'>
                     <li className={setActiveIcon()} onClick={OnSlide}>
                         <a title={t('navbar.slide_show')} className='icon-secondary'><BsFillCameraVideoFill /></a>
                     </li>
-                </ul>     
-            </div>
+                    
+                    <li className='icon-toggle2' onClick={() => setShow(!show)}>
+                        <a title={t('navbar.hideshow_chart')} className='icon-secondary'><IoIosArrowDropupCircle /></a>
+                    </li>
+                    <li className='icon-toggle2'>
+                        <a className='icon-secondary'><BsThreeDotsVertical /></a>
+                    </li>
+
+                </ul>
+            {/* </div> */}
         </div>
-        </>
     );
 }
 
